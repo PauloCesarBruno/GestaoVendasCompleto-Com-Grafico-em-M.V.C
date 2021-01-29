@@ -1,0 +1,18 @@
+﻿<!-- Inportar:-->
+@model VendaModel
+
+<br />
+<br />
+<h1><em>Você não pode EXCLUIR este produto !!!</em></h1>
+<br/>
+<h4><em style="color:darkred;">Este produto não pode ser excluido por motivo de que existe(m) Venda(s) Registrada(s) para o mesmo.</em></h4>
+<br /> 
+<button type="button" class="btn  btn-primary" onclick="Voltar()">Retornar à Listagem de Proutos</button>
+
+<script>
+
+    function Voltar() {
+        window.location.href = '../../Produto/Index';
+    }
+</script>
+

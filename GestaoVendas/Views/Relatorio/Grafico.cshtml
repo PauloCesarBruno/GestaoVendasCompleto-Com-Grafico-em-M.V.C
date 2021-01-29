@@ -1,0 +1,47 @@
+﻿<br />
+<h2>Grafico de Vendas por Produto</h2>
+
+<!--O Script abaixo tem que ser sempre esse para trabalhar com o "pie"-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+
+<!--O código abixo foi retirado do site: www.chartjs.org no Samples Escolha "pie"-->
+<div  style="padding:5px;" id="canvas-holder" style="width:60%";>
+    <canvas id="chart-area"></canvas>
+</div>
+
+<script>
+    var randomScalingFactor = function() {
+        return Math.round(Math.random() * 50);
+    };
+
+    var config = {
+        type: 'pie',
+        data: {
+            datasets: [{
+                data: [@Html.Raw(ViewBag.Valores)],
+                backgroundColor: [@Html.Raw(ViewBag.Cores)],
+                label: 'Dataset 1'
+            }],
+            labels: [@Html.Raw(ViewBag.Labels)]
+        },
+        options: {
+            responsive: true
+        }
+    };
+
+    window.onload = function() {
+        var ctx = document.getElementById('chart-area').getContext('2d');
+        window.myPie = new Chart(ctx, config);
+    };
+</script>
+
+<br />
+
+<!-- Rotina Abaixo é para voltar ao Menu -->
+<button type="button" class="btn  btn-info" onclick="Voltar()"><i class="fa fa-step-backward"></i> Retornar para Relatórios</button>
+
+<script>
+    function Voltar() {
+        window.location.href = '../../Relatorio/Index';
+    }
+</script>

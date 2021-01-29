@@ -1,0 +1,99 @@
+﻿<div class="container">
+    <br />
+    <br />
+    <div class="row'">
+        <div class="col col-lg-5">
+            <h3>Lista de Clientes</h3>
+        </div>
+        <div class="col col-sm-7">
+            <button style="margin: 12px;" type="button" class="btn btn-default" onclick="Filtro()"><i class="fa fa-filter"></i> Filtro CPF/CNPJ</button>
+        </div>
+    </div>
+</div>
+
+<br />
+
+<div class=" container">
+    <div class="table-responsive">
+        <table class=" table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th style="padding: 0px 20px 0px 20px;">Id</th>
+                    <th style="padding: 0px 20px 0px 20px;">Nome</th>
+                    <th style="padding: 0px 20px 0px 20px;">CPF_CNPJ</th>
+                    <th style="padding: 0px 20px 0px 20px;">Email</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    foreach (var item in (List<ClienteModel>)ViewBag.ListaClientes)
+                    {
+                        <tr>
+                            <td style="padding:2PX;"><button type="button" class="btn btn-warning btn-sm Editar" data-id="@item.Id"><i class="fa fa-edit"></i> Editar</button></td>
+                            <td style="padding:2PX;"><button type="button" class="btn btn-danger  btn-sm Excluir" data-id="@item.Id"><i class="fa fa-eraser"></i> Excluir</button></td>
+
+                            <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
+                            <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>
+                            <td style="padding: 0px 20px 0px 20px;">@item.CPF_CNPJ</td>
+                            <td style="padding: 0px 20px 0px 20px;">@item.Email</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="modal" id="modal">
+
+        </div>
+
+        @section scripts{
+            <script>
+                $(function () {
+                    $(".Editar").click(function () {
+                        var id = $(this).attr("data-id");
+                        $("#modal").load("Cadastro?id=" + id, function () {
+                            $("#modal").modal();
+                        })
+                    });
+                })
+
+                $(function () {
+                    $(".Excluir").click(function () {
+                        var id = $(this).attr("data-id");
+                        $("#modal").load("Excluir?id=" + id, function () {
+                            $("#modal").modal();
+                        })
+                    });
+                })
+
+                $(".Cadastro").click(function () {
+                    $("#modal").load("Cadastro", function () {
+                        $("#modal").modal();
+                    })
+                });
+
+            </script>
+        }
+
+    </div>
+    <br />
+    <button class="btn  btn-success btn-sm Cadastro" type="button"> <i class="fa fa-user"></i> Cadastrar Cliente</button>
+    <button style="margin-left: 3px;" type="button" class="btn  btn-default btn-sm" onclick="Voltar()"><i class="fa fa-step-backward"></i> Retornar para o Menu</button>
+
+</div>
+
+
+<br />
+<script>
+
+    function Filtro() {
+        window.location.href = '../Cliente/Filtro';
+    }
+
+    function Voltar() {
+        window.location.href = '../../Home/Menu';
+    }
+</script>

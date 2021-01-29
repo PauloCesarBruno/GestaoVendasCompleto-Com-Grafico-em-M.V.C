@@ -1,0 +1,70 @@
+﻿<!--Importar a LoginModel para poder Usar as TagHelpers-->
+@model  LoginModel 
+
+@{ 
+    Layout = "../Shared/_LayoutLogin.cshtml"; // Aqui Direciona p/ LayoutLogin onde muda o Fundo...
+}
+
+
+<div class="login-form">
+    <Span class="tamanho">
+        <h1 class="text-center"><em><strong>Gestão de Vendas</em></strong></h1>
+    </Span>
+
+    <form asp-controller="Home" asp-action="Login" method="post">
+        <div>
+            <h2 class="text-center">Acesso Para Usuários</h2>
+            <h5 class="text-center">Digite seu E-Mail e Senha:</h5>
+        </div>
+        <br />
+
+        @{
+            try
+            {
+                var erro = TempData["ErrorLogin"].ToString();
+                <h5 class=" = text-danger">@erro</h5>
+            }
+            catch
+            {
+                //
+            }
+        }
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-envelope-o"></i></span>
+                <input type="text" class="form-control" asp-for="Email" placeholder="E-Mail">
+            </div>
+
+            <!--Mostragem das mensagens de Erro do Requerimento da Classe LoginModel-->
+            <span asp-validation-for="Email" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <input type="password" class="form-control" asp-for="Senha" maxlength="10" placeholder="Senha (Max.10 Caracteres)">
+            </div>
+
+            <!--Mostragem da mensagem de Erro do Requerimento da Classe LoginModel-->
+            <span asp-validation-for="Senha" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+            <button style="padding: 1px 15px 3px 2px; border-radius: 3px; margin-top: 28px;" type="submit" class="btn btn-primary login-btn btn-block fa fa-sign-in"> Entrar</button>
+        </div>
+        <div class="clearfix">
+            <br />
+            <!--<label class="pull-left checkbox-inline"><input type="checkbox" checked="checked"> Lembrar meu acesso</label>-->
+            <a style="margin-right: 265px;" href="../../Home/LembrarSenha" class="pull-right">Esqueceu a Senha ?</a>
+        </div>
+    </form>
+    <p class="text-center text-muted small" style="color:darkslategrey;">Usuário Novo ? Não tem uma conta? <a href="../../Home/SolicitacaoSenha">Solicite Uma!</a></p> 
+</div>
+
+<style>
+    .tamanho h1 {
+        font-size: 55px;
+        color: #444242;
+        text-shadow:2px -3px #056cc3;
+    }
+</style>

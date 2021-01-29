@@ -1,0 +1,77 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* QR code generator */
+#qrCode {
+    margin: 15px;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+/* Table Base */
+
+table {
+    max-width: 100%;
+    background-color: transparent;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-family: arial;
+}
+
+.table {
+    border-bottom: #999999 solid 1px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+    .table th,
+    .table td {
+        border-right: #999999 solid 1px;
+        font-size: 12px;
+        padding: 8px;
+        line-height: 20px;
+        text-align: left;
+        vertical-align: middle;
+    }
+
+        .table td:last-child {
+            border-right: 0;
+        }
+
+    .table thead th {
+        font-weight: normal;
+        background-color: #005dab;
+        color: #fff;
+        font-size: 15px;
+    }
+
+    .table tbody > tr:nth-child(odd) > td,
+    .table tbody > tr:nth-child(odd) > th {
+        background-color: #f8f8f8;
+    }

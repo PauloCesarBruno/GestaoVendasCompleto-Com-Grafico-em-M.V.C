@@ -1,0 +1,33 @@
+﻿<div class="container">
+    <br />
+
+    <h2>Relatórios do Sistema</h2>
+    <hr />
+    <br />
+
+    <button class="btn btn-block btn-primary" type="button" onclick="Relatorio('Vendas')"><i class="fa fa-calendar"></i> Vendas por Período</button>
+    <br />
+    <button class="btn btn-block btn-warning" type="button" onclick="Relatorio('Grafico')"><i class="fa fa-bar-chart"></i> Gráfico de Vendas</button>
+    <br />
+    <button class="btn btn-block btn-success" type="button" onclick="Relatorio('Comissao')"><i class="fa fa-money"></i> Comissão de Vendedores</button>
+    <br /><br /><br />
+    <!-- Rotina Abaixo é para voltar a Listagem de Produtos -->
+    <button type="button" class="btn  btn-info" onclick="Voltar()"><i class="fa fa-step-backward"></i> Retornar para o Menu</button>
+
+</div>
+<br/>
+<script>
+
+    // Função em JS para Cadastrar
+    function Relatorio(action) {
+        window.location.href = "../Relatorio/" + action;
+    }
+
+</script>
+
+
+<script>
+    function Voltar() {
+        window.location.href = '../../Home/Menu';
+    }
+</script>

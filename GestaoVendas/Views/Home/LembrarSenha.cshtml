@@ -1,0 +1,31 @@
+﻿
+@{
+    Layout = "../Shared/_LayoutLogin.cshtml"; // Aqui Direciona p/ LayoutLogin onde muda o Fundo...
+}
+
+
+<Span class="tamanho">
+    <h1 class="text-center"><em><strong>Gestão de Vendas</em></strong></h1>
+</Span>
+
+<h2 style="font-size:45px; color: #444242; text-shadow:2px -3px #056cc3; text-align:center;">Esqueceu sua Senha? Solicite uma nova Senha à um CREDENCIADO...</h2>
+<body>
+    
+    <div class="container">
+        <button style="margin-top: 350px;" type="button" class="btn btn-block  btn-warning fa fa-step-backward" onclick="Voltar()"> Retornar</button>
+    </div>
+
+    <script>
+        function Voltar() {
+            window.location.href = '../Home/Login';
+        }
+    </script>
+</body>
+
+<style>
+    .tamanho h1 {
+        font-size: 55px;
+        color: #444242;
+        text-shadow: 2px -3px #056cc3;
+    }
+</style>

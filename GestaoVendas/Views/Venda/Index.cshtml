@@ -1,0 +1,60 @@
+﻿<br />
+<br />
+<h2>Listagem de Vendas</h2>
+
+<br />
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+
+            <th>Id</th>
+            <th>Data</th>
+            <th>Vendedor</th>
+            <th>Cliente</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+        @{
+            foreach (var item in (List<VendaModel>)ViewBag.ListaVendas)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Data</td>
+                    <td>@item.Vendedor_Id</td>
+                    <td>@item.Cliente_Id</td>
+                    <td>R$ @item.Total</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+<div class="modal" id="modal">
+
+</div>
+
+@section scripts{
+    <script>
+       
+        $(".Venda").click(function () {
+            $("#modal").load("Registrar", function () {
+                $("#modal").modal();
+            })
+        });
+
+    </script>
+}
+<br />
+<button class="btn  btn-success btn-sm Venda" type="button"> <i class="fa fa-check"></i> Registrar Nova Venda</button>
+<button style="margin-left: 3px;" type="button" class="btn  btn-default btn-sm" onclick="Voltar()"><i class="fa fa-step-backward"></i> Retornar para o Menu</button>
+
+<script>
+
+    function Voltar() {
+        window.location.href = '../../Home/Menu';
+    }
+</script>
+

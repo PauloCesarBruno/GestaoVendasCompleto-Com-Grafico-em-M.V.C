@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gestão de Vendas</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+        <!--Alterar um favicon:-->
+        <link rel="icon" href="~/Grafico.ico" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+
+<style>
+    /* Cabecalho*/
+    .navbar {
+        background-color: rgb(37, 88, 126);
+        color: white;
+        padding-left:50px;
+    }
+
+    .navbar a {
+        text-decoration: none;
+        color: rgb(200, 200, 200);
+    }
+
+    .navbar a:hover {
+        text-decoration: none;
+        color: white;
+    }
+</style>
+
+
+<body onload="CarregaUsuarioLogado()">
+    <br>
+    <!-- Chamada da Função em Java Script Criada Abaixo -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+
+        <h1><a asp-controller="Home" asp-action="Menu"><i class="fa fa-home pr-3"></i></a> Gestão de Vendas</h1>
+        <div Id="NomeUsuarioLogado"></div>
+
+        <div>
+            <!-- Abaixo Injeção de dependencia para usar variáveis da Cessão -->
+            @using Microsoft.AspNetCore.Http
+            @inject IHttpContextAccessor HttpContextAccessor
+
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+
+
+        <footer class="rodape">
+            <style>
+
+                .sociais a {
+                    font-size: 1.5em;
+                    padding: 0px 20px;
+                    text-decoration: none;
+                    color: rgb(200,200,200);
+                }
+
+                .sociais a:hover {
+                    text-decoration: none;
+                    color: white;
+                }
+            </style>
+
+
+            <div class="navbar navbar-inverse navbar-bottom text-center">
+                <p>&copy; @DateTime.Now.Year  - Gestão de Vendas por Paulo Bruno - Desenvolvedor
+                    </p>
+                <div class="sociais">
+                    <a href="https://m.facebook.com/paulocesar.cbruno" target="_blank"><i class="fa fa-facebook"></i></a>
+                    <a href="https://www.youtube.com/channel/UC-7rKFVKo4JNNifPBBEEoYw?view_as=subscriber" target="_blank"><i class="fa fa-youtube"></i></a>
+                    <a href="http://sistemahospitalar.gear.host/" target="_blank"><i class="fa fa-globe"></i></a>
+                    <br/><br/>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha384-K+ctZQ+LL8q6tP7I94W+qzQsfRV2a+AfHIi9k8z8l9ggpc8X+Ytst4yBo/hH+8Fk">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+
+    @RenderSection("Scripts", required: false)
+
+
+    <!-- Função de Java Script -->
+    <script>
+
+        function CarregaUsuarioLogado()
+        {
+            var nome = '@HttpContextAccessor.HttpContext.Session.GetString("NomeUsuarioLogado")'
+
+            if (nome != "") { // Usuário Logado
+                var divNome = document.getElementById("NomeUsuarioLogado");
+                divNome.innerHTML = "Logado:  " + nome  + " <a href='../Home/Login/0'> (Sair)</a>";
+                divNome.style = "color:#ffffff; padding-top:-15px;";
+            }
+            else { // Usuário não Logado
+                window.location.href = '../Home/Login';
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+﻿<!-- Inportar:-->
+@model VendedorModel
+
+<br />
+<br />
+<h1><em>Você não pode EXCLUIR este Vendedor !!!</em></h1>
+<br/>
+<h4><em style="color:darkred;">Este Vendedor não pode ser excluido por motivo de que existe(m) Venda(s) Registrada(s) para o mesmo.</em></h4>
+<br /> 
+<button type="button" class="btn  btn-primary" onclick="Voltar()">Retornar à Lista de Vendedores</button>
+
+<script>
+
+    function Voltar() {
+        window.location.href = '../../Vendedor/Index';
+    }
+</script>
+
