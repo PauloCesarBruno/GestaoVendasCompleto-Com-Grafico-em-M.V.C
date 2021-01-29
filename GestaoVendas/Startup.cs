@@ -24,6 +24,7 @@ namespace SistemaVendas
         {
             services.AddCors();
             services.AddMvc();
+            //=========================================================
             //Adicionar os serviços Abaixo (Injeção de dependência)
             // Configurando o Hosta para que ele faça uso de seccion.
             services.AddSession();
