@@ -23,18 +23,28 @@ namespace SistemaVendas.Controllers
         [HttpPost]
         public IActionResult Vendas(RelatorioModel relatorio)
         {
-            if (relatorio.DataDe.Year == 0001)
+            try
             {
-                ViewBag.ListaVendas = new VendaModel().ListagemVendas();              
+
+
+                if (relatorio.DataDe.Year == 0001)
+                {
+                    ViewBag.ListaVendas = new VendaModel().ListagemVendas();
+                }
+                else
+                {
+                    string DataDe = relatorio.DataDe.ToString("yyyy/MM/dd");
+                    string DataAte = relatorio.DataAte.ToString("yyyy/MM/dd");
+                    ViewBag.ListaVendas = new VendaModel().ListagemVendas(DataDe, DataAte);
+                }
             }
-            else
+            catch
             {
-                string DataDe = relatorio.DataDe.ToString("yyyy/MM/dd");
-                string DataAte = relatorio.DataAte.ToString("yyyy/MM/dd");
-                ViewBag.ListaVendas = new VendaModel().ListagemVendas(DataDe, DataAte);               
+                //
             }
             return View();
         }
+
 
         [HttpPost]
         public IActionResult Comissao(RelatorioModel relatorio)
@@ -46,7 +56,7 @@ namespace SistemaVendas.Controllers
             else
             {
                 string DataDe = relatorio.DataDe.ToString("yyyy/MM/dd");
-                string DataAte = relatorio.DataAte.ToString("yyyy/MM/dd");               
+                string DataAte = relatorio.DataAte.ToString("yyyy/MM/dd");
                 ViewBag.ListaComissao = new ComissaoModel().ListagemComissao(DataDe, DataAte);
             }
             return View();
@@ -68,7 +78,7 @@ namespace SistemaVendas.Controllers
                 labels += "'" + lista[i].DescricaoProduto.ToString() + "',";
 
                 // Escolher Aleatoriamente as Cores para Compor as Partes do Grafico tipo Torta
-                cores += "'" +  String.Format("#{0:X6}", random .Next (0X1000000)) + "',";
+                cores += "'" + String.Format("#{0:X6}", random.Next(0X1000000)) + "',";
             }
 
             ViewBag.Valores = valores;
