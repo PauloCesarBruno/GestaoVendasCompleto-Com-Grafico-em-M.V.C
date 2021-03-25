@@ -12,10 +12,10 @@ namespace SistemaVendas.Uteis
     // Data Access Layer (DAL - Camada de Acesso à Dados) //
     public class DAL
     {
-        private static readonly String Server = "DESKTOP-CBCKVV5"; // Servidor SQL
-        private static readonly String Database = "sistema_vendas"; // Banco de Dados no SQL
-        private static readonly String User = "sa"; // Usuário SQL
-        private static readonly String Password = "Paradoxo22"; // Senha SQL
+        private static readonly String Server = "DESKTOP-CBCKVV5"; // Servidor SQL...
+        private static readonly String Database = "sistema_vendas"; // Banco de Dados no SQL...
+        private static readonly String User = "sa"; // Usuário SQL...
+        private static readonly String Password = "Paradoxo22"; // Senha SQL...
 
         // String de Conexão SQL
         private static readonly String Connectionstring= $"Server={Server};Database={Database};Uid={User};Pwd={Password};";
