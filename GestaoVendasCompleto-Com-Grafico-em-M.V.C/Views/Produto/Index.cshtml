@@ -1,0 +1,101 @@
+﻿<div class="container">
+    <br />
+    <br />
+    <div class="row'">
+        <div class="col col-lg-5">
+            <h3>Lista de Produtos</h3>
+            <br />
+        </div>
+        <div class="col col-sm-7">
+            <button style="margin: 12px;" type="button" class="btn btn-default" onclick="Filtro()"><i class="fa fa-filter"></i> Filtro por Código</button>
+        </div>
+    </div>
+</div>
+
+<div class=" container">
+    <div class="table-responsive">
+        <table class=" table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th style="padding: 0px 10px 0px 10px;">Id</th>
+                    <th style="padding: 0px 10px 0px 10px;">Nome</th>
+                    <th style="padding: 0px 10px 0px 10px;" ">Descrição</th>
+                    <th style="padding: 0px 10px 0px 10px;">Preço Unitário</th>
+                    <th style="padding: 0px 10px 0px 10px;">Quantidade Estoque</th>
+                    <th style="padding: 0px 10px 0px 10px;">Unidade Medida</th>
+                    <th style="padding: 0px 10px 0px 10px;">Link Foto</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    foreach (var item in (List<ProdutoModel>)ViewBag.ListaProdutos)
+                    {
+                        <tr>
+                            <td style="padding-left:3px;padding-right:3px;"><button type="button" class="btn btn-warning btn-sm Editar" data-id="@item.Id"><i class="fa fa-edit"></i> Editar</button></td>
+                            <td style="padding-left:3px;padding-right:3px;"><button type="button" class="btn btn-danger btn-sm Excluir" data-id="@item.Id"><i class="fa fa-eraser"></i> Excluir</button></td>
+
+                            <td style="padding: 0px 10px 0px 10px;">@item.Id</td>
+                            <td style="padding: 0px 10px 0px 10px;">@item.Nome</td>
+                            <td style="padding: 0px 10px 0px 10px;">@item.Descricao</td>
+                            <td style="padding: 0px 10px 0px 10px;">@item.Preco_Unitario</td>
+                            <td style="padding: 0px 10px 0px 10px;">@item.Quantidade_Estoque</td>
+                            <td style="padding: 0px 10px 0px 10px;">@item.Unidade_Medida</td>
+                            <td style="padding: 0px 10px 0px 10px;"><img src="@item.Link_Foto" width="150" height="150" /></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <div class="modal" id="modal">
+
+        </div>
+
+        @section scripts{
+            <script>
+                $(function () {
+                    $(".Editar").click(function () {
+                        var id = $(this).attr("data-id");
+                        $("#modal").load("Cadastro?id=" + id, function () {
+                            $("#modal").modal();
+                        })
+                    });
+                })
+
+                $(function () {
+                    $(".Excluir").click(function () {
+                        var id = $(this).attr("data-id");
+                        $("#modal").load("Excluir?id=" + id, function () {
+                            $("#modal").modal();
+                        })
+                    });
+                })
+
+                $(".Cadastro").click(function () {
+                    $("#modal").load("Cadastro", function () {
+                        $("#modal").modal();
+                    })
+                });
+
+            </script>
+        }
+    </div>
+
+    <br />
+    <button class="btn  btn-success btn-sm Cadastro" type="button"> <i class="fa fa-check"></i> Cadastrar Novo Produto</button>
+    <button style="margin-left: 3px;" type="button" class="btn  btn-default btn-sm" onclick="Voltar()"><i class="fa fa-step-backward"></i> Retornar para o Menu</button>
+</div>
+
+<script>
+
+    function Filtro() {
+        window.location.href = "../Produto/Filtro"
+    }
+
+    function Voltar() {
+        window.location.href = '../../Home/Menu';
+    }
+</script>

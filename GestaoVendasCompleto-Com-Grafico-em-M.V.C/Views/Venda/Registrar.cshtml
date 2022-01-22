@@ -1,0 +1,162 @@
+﻿<!-- Inportar:-->
+@model VendaModel
+@{
+    Layout = null;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true"></span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Registrar Uma Venda</h4>
+        </div>
+        <div class="modal-body">
+            <form asp-controller="Venda" asp-action="Registrar">
+                @*<input type="hidden" asp-for="Id" value="@try { @ViewBag.Venda.Id } catch { }" />*@
+
+                <div class="form-group">
+                    <label>Cliente</label>
+                    <select asp-for="Cliente_Id" class="form-control">
+                        @{
+                            try
+                            {
+                                foreach (var item in (List<ClienteModel>)ViewBag.ListaClientes)
+                                {
+                                    <option value="@item.Id">@item.Nome</option>
+                                }
+                            }
+                            catch (Exception)
+                            {
+                                //
+                            }
+                        }
+                    </select>
+                </div>
+
+                <!-- Vendedores esta sendo pego na Classe pelo Id Logado, não fazendo sendido ser apresentado aqui -->
+                <!--===============================================================================================-->
+                @*<div class="form-group">
+                        <label>Vendedor</label>
+                        <select asp-for="Vendedor_Id" class="form-control">
+                            @{
+                                foreach (var item in (List<VendedorModel>)ViewBag.ListaVendedores)
+                                {
+                                    <option value="@item.Id">@item.Nome</option>
+                                }
+                            }
+                        </select>
+                    </div>*@
+
+
+                <label style="color:blue;">Produtos</label>
+                <br />
+                <div class="form-group">
+                    <div class="col-lg-7">
+                        <select style="margin-left: -16px;" class="form-control" id="sltProduto">
+                            @{
+                                try
+                                {
+                                    foreach (var item in (List<ProdutoModel>)ViewBag.ListaProdutos)
+                                    {
+                                        <option value="@item.Id">@item.Nome | @item.Preco_Unitario</option>
+                                    }
+                                }
+                                catch (Exception)
+                                {
+                                    //
+                                }
+                            }
+                        </select>
+                    </div>
+                    <div class="col-lg-2">
+                        <input type="text" class="form-control" value="1" id="txtQuantidade" required /> <!-- 1 Valor Defoult -->
+                    </div>
+
+                    <div class="col-lg-3">
+                        <button type="button" class="btn btn-block btn-warning" onclick="AdicionarProduto()"><i class="fa fa-plus-circle"></i> Adicionar</button>
+                    </div>
+                </div>
+
+                <br /><br />
+
+                <table class="table table-bordered">
+
+                    <thead>
+                        <tr>
+                            <td>Id</td>
+                            <td>Nome</td>
+                            <td>Quantidade</td>
+                            <td>Preço Unitário</td>
+                            <td>Total</td>
+                        </tr>
+                    </thead>
+                    <tbody id="listaProdutos"></tbody>
+                </table>
+
+                <div style="float:left; font-size:22px;">Total: R$</div>
+                <div style="float:left; font-size:22px; margin-left:5px;" id="divTotal">0.00</div>
+
+                <input type="hidden" id="txtTotal" asp-for="Total" />
+
+                <br /><br />
+
+                <!--No style, para aparecer o JSON que vai ser lançado, colocar (Display: inline;-->
+                <textarea asp-for="ListaProdutos" id="ListaProdutosJSON" style="display:none;"></textarea>
+
+                <button class="btn  btn-success btn-sm" type="submit" onclick="Cadastrar()"> <i class="fa fa-check"></i> Registrar Venda</button>
+                <button style="margin-left: 3px;" type="button" class="btn  btn-default btn-sm" onclick="Voltar()"><i class="fa fa-step-backward"></i> Retornar para o</button>
+
+            </form>
+        </div>
+
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+
+    var Itens = Object();
+    Itens.Produtos = new Array();
+
+    var CodigoProduto = document.getElementById("sltProduto");
+    var QtdeProduto = document.getElementById("txtQuantidade");
+    var ListaProdutos = document.getElementById("listaProdutos");
+    var TotalVenda = document.getElementById("divTotal");
+    var txtTotal = document.getElementById("txtTotal");
+    var ListaProdutosJSON = document.getElementById("ListaProdutosJSON");
+
+    function Voltar() {
+        window.location.href = '../Venda/Index';
+    }
+
+    function AdicionarProduto() {
+        var DescricaoPreco = CodigoProduto.options[CodigoProduto.selectedIndex].text;
+        var arrayDescricaoPreco = DescricaoPreco.split('|');
+        var total = (arrayDescricaoPreco[1].replace(",", ".") * QtdeProduto.value);
+        total = Math.round(total * 100) / 100;
+
+        Itens.Produtos.push({
+            "CodigoProduto": CodigoProduto.value,
+            "DescricaoProduto": arrayDescricaoPreco[0],
+            "QtdeProduto": QtdeProduto.value,
+            "PrecoUnitario": arrayDescricaoPreco[1],
+            "Total": total
+        });
+
+        ListaProdutosJSON.innerHTML = JSON.stringify(Itens.Produtos); // Pega o Json e joga numa TextArea Invisível.
+
+        var produto = "<tr>" +
+            "<td>" + CodigoProduto.value + "</td>" +
+            "<td>" + arrayDescricaoPreco[0] + "</td>" +
+            "<td>" + QtdeProduto.value + "</td>" +
+            "<td> R$" + arrayDescricaoPreco[1] + "</td>" +
+            "<td> R$ " + total + "</td>" +
+            "</tr>";
+
+        ListaProdutos.innerHTML += produto;
+        var totalGeral = Math.round((TotalVenda.innerText * 1 + total) * 100) / 100;
+        TotalVenda.innerHTML = totalGeral;
+        txtTotal.value = totalGeral.toString().replace(".", ",");
+    }
+
+</script>

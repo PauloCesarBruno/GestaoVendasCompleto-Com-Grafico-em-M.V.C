@@ -1,0 +1,102 @@
+﻿@model RelatorioModel
+
+    <head>
+
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+        <script>
+            var total = 0;
+            $(document).ready(function () {
+                $('table tbody tr').each(function () {
+                    total += parseFloat(this.children[3].innerHTML.replace(',', '.'),);
+                });
+                $('table tfoot td').text(total.toLocaleString('pt-BR', { minimumFractionDigits: 2 }));
+            });
+
+            var totalc = 0;
+            $(document).ready(function () {
+                $('table tbody tr').each(function () {
+                    totalc += parseFloat(this.children[4].innerHTML.replace(',', '.'),);
+                });
+                $('table tfoot th').text(totalc.toLocaleString('pt-BR', { minimumFractionDigits: 2 }));
+            });
+        </script>
+        
+    </head>
+
+    <br />
+    <br />
+
+    <h2>Comissão de Vendedores por Período</h2>
+
+    <br />
+
+    <form asp-controller="Relatorio" asp-action="Comissao">
+        <div class="form-group">
+            <label>Período</label>
+            <input asp-for="DataDe" type="date" required class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <input asp-for="DataAte" type="date" required class="form-control" />
+        </div>
+
+        <button type="submit" class="btn btn-success"><i class="fa fa-search"></i> Pesquisar</button>
+    </form>
+
+    <br />
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+
+                <th>Id</th>
+                <th>Data</th>
+                <th>Nome</th>
+                <th>Valor</th>
+                <th>Comissão (5%)</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @{
+                try
+                {
+                    foreach (var item in (List<ComissaoModel>)ViewBag.ListaComissao)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Data</td>
+                            <td>@item.Nome</td>
+                            <td>@item.Valor</td>
+                            <td>@item.Comissao</td>
+
+                        </tr>
+                    }
+                }
+                catch { }
+            }
+        </tbody>
+
+        <tfoot>
+            <tr>
+                <td colspan="4" style="color: blue; padding-left: 825px;"></td>
+                <th style="color: red;"></th>
+            </tr>            
+        </tfoot>
+
+       
+
+    </table>
+
+    <br />
+
+    <!-- Rotina Abaixo é para voltar para Relatórios do Sistema -->
+    <button type="button" class="btn  btn-info" onclick="Voltar()"><i class="fa fa-step-backward"></i> Retornar para Relatórios do Sistema</button>
+
+    <script>
+        function Voltar() {
+            window.location.href = '../../Relatorio/Index';
+        }
+    </script>

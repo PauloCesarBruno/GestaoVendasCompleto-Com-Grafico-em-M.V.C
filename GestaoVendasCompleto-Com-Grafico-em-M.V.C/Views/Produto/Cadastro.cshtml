@@ -1,0 +1,131 @@
+﻿<!-- Inportar:-->
+@model ProdutoModel
+@{ 
+    Layout = null;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Cadastro de Produtos</h4>
+        </div>
+        <div class="modal-body">
+            
+            <form asp-controller="Produto" asp-action="Cadastro">
+                <input type="hidden" asp-for="Id" value="@try { @ViewBag.Produto.Id } catch { }" />
+
+                <div class="form-group">
+                    <label>Nome</label>
+                    <input asp-for="Nome" type="text" class="form-control" required value="@try { @ViewBag.Produto.Nome } catch { }" />
+                </div>
+
+
+                <div class="form-group">
+                    <label>Descrição</label>
+                    <!-- Rotina Abaixo para transformar o campo em uma "TextArea" -->
+
+                    @{
+                        var vDescricao = "";
+
+                        try
+                        {
+                            vDescricao = @ViewBag.Produto.Descricao;
+                        }
+                        catch
+                        {
+                            //
+                        }
+                    }
+
+                    @Html.TextArea("Descricao", vDescricao, new { @Class = "form-control" })
+
+                    <!-- Abaixo esta comentado pois seria um campo ao invéz de uma TextArea -->
+                    @*@<input asp-for="Descricao" type="text" class="form-control" value="@try { @ViewBag.Produto.Descricao } catch { }" />*@
+
+                   
+                </div>
+
+
+                <div class="form-group">
+                    <label>Preço Unitário</label>
+                    <input asp-for="Preco_Unitario" type="text" class="form-control" required value="@try { @ViewBag.Produto.Preco_Unitario } catch { }" />
+                </div>
+
+
+                <div class="form-group">
+                    <label>Qtd. Estoque</label>
+                    <input asp-for="Quantidade_Estoque" type="text" class="form-control" required value="@try { @ViewBag.Produto.Quantidade_Estoque } catch { }" /> 
+                </div>
+
+
+                <div class="form-group">
+                    <label>Unidade Medida</label>
+                    <!-- Abaixo (no comentado seria somente uma opção) por isso está comentado-->
+                    @*<input asp-for="Unidade_Medida" type="text" class="form-control" value="@try { @ViewBag.Produto.Unidade_Medida } catch { }" />*@
+
+                    <!--=============================================================================================================================-->
+                    <!-- Rotina Abaixo Crio uma ComboBox já especificando varias Unidades de Medida -->
+                    @{
+                        var vUnidadeMedida = "";
+                        try
+                        {
+                            vUnidadeMedida = @ViewBag.Produto.Unidade_Medida;
+                        }
+                        catch
+                        {
+                            //
+                        }
+                    }
+
+                    <select asp-for="Unidade_Medida" class="form-control" required>
+                        @{
+                            if (vUnidadeMedida != "")
+                            {
+                                <option value="@vUnidadeMedida" selected>@vUnidadeMedida</option>
+                            }
+                        }
+
+                        <option value="un">un</option>
+                        <option value="cx">cx</option>
+                        <option value="kg">kg</option>
+                        <option value="g">g</option>
+                        <option value="lt">lt</option>
+                        <option value="mt">mt</option>
+                        <option value="ton">ton</option>
+                    </select>
+
+                  
+                </div>
+
+                <div class="form-group">
+
+                    <!-- Rotina Abaixo Faz com que apareca a Imagem na Edição -->
+                    <label>Foto</label>
+
+                    @try
+                    {
+                        <img src="@try { @ViewBag.Produto.Link_Foto } catch { }" width="150" height="150" />
+                    }
+                    catch { }
+
+                    <input asp-for="Link_Foto" type="text" class="form-control" required value="@try { @ViewBag.Produto.Link_Foto } catch { }" />   
+                </div>
+
+                <button type="submit" class="btn-success btn-sm"><i class="fa fa-check"></i> Registrar Produto</button>
+                <button style="margin-left: 3px;" type="button" class="btn  btn-info btn-sm" onclick="Voltar()"><i class="fa fa-step-backward"></i> Retornar para Listagem de Clientes</button>
+
+            </form>
+            <br />
+        </div>
+       
+    </div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+    function Voltar() {
+        window.location.href = '../../Produto/Index';
+    }
+</script>
+

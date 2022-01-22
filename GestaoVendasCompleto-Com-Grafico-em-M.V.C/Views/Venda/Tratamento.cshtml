@@ -1,0 +1,24 @@
+﻿<!-- Inportar:-->
+@model VendaModel
+
+<br />
+<br />
+<div class=" container">
+    <div class="table-responsive">
+        <h1 style="color:darkred;"><em>Você não selecionou nenhum produto para venda !!!</em></h1>
+        <h4 style="color:darkred;"><em>Vide botão em destaque.</em></h4>
+        <hr />
+        <img src="~/images/FotoTratamento.png" width="850" height="300" />
+        <br /><br />
+    </div>
+</div>
+<hr/>
+<button type="button" class="btn  btn-primary" onclick="Voltar()"><i class="fa fa-step-backward"></i> Retornar ao Registro de Vendas</button>
+
+<script>
+
+    function Voltar() {
+        window.location.href = '../Venda/Index';
+    }
+</script>
+

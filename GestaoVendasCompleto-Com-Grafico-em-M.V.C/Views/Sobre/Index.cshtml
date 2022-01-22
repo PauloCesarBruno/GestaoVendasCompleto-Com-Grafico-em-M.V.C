@@ -1,0 +1,64 @@
+﻿@{
+    Layout = "../Shared/_Layout.cshtml"; // Aqui Direciona p/ LayoutLogin onde muda o Fundo...
+}
+<br />
+<br />
+
+<Span class="tamanho">
+    <h1 class="text-center"><em><strong> Sobre o Sistema Gestão de Vendas</em></strong></h1>
+</Span>
+
+<br />
+
+<body>
+
+    <div class=" container">
+        <div class="table-responsive">
+
+            <div class="col-lg-6">
+                <div class=" row">
+                    <p style="text-align:justify;"><strong><em>O Sistema GESTÃO DE VENDAS, foi elaborado e desenvolvido por Paulo Bruno (desenvolvedor), para atender as necessidades de um pequeno, médio ou grande empresario, no que diz respeito a Gerir seus negócios, tendo varias rotinas que vão desde cadastro de produtos, baixa de produtos em estoque conforme os mesmos vão sendo vendidos, cadastro de Clientes, Vendedores, Contole de comissionamento de vendedores, dentre outras Funcionalidades.</em></strong></p>
+                    <br />
+                    <p style="text-align:justify; color:darkred;"><strong>Link´s do Desenvolvedor No Rodapé desta Página.</strong></p>
+                </div>
+            </div>
+
+            <div class="col-lg-1">
+                <div class="row">
+                    <p></p>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="row">
+                    <img class="img-responsive" src="~/images/GestãoVendas.png" width="448" height="200" />
+                </div>
+            </div>
+
+            <br />
+           
+           
+           
+        </div>
+    </div>
+
+    <button style="margin-left:15px;" type="button" class="btn btn-warning" onclick="Voltar()"><i class="fa fa-step-backward"></i> Retornar</button>
+
+
+    <script>
+        function Voltar() {
+            window.location.href = '../Home/Menu';
+        }
+    </script>
+
+</body>
+
+<style>
+    .tamanho h1 {
+        font-size: 40px;
+        color: #444242;
+        text-shadow: 2px -3px #056cc3;
+    }
+</style>
+
+

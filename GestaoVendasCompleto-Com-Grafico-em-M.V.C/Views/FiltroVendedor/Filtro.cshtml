@@ -1,0 +1,87 @@
+﻿@model VendedorModel
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<br />
+<div class="container">
+    <div class="row">
+        <div class="col col-2">
+            <h3>Filtro</h3>
+        </div>
+        <br />
+
+        <form asp-controller="FiltroVendedor" asp-action="Filtro">
+
+            <div class=" col-lg-2">
+                <input asp-for="Id" type="number" class="form-control" placeholder="Código" />
+            </div>
+            <div class="col col-lg-8">
+                <button type="submit" class="btn btn-default">Buscar</button>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<br />
+
+<div class=" container">
+    <div class="table-responsive">
+        <table class=" table-bordered">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th style="padding: 0px 20px 0px 20px;">Id</th>
+                    <th style="padding: 0px 20px 0px 20px;">Nome</th>                    
+                    <th style="padding: 0px 20px 0px 20px;">Email</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @{
+                    try
+                    {
+                        foreach (var item in (List<VendedorModel>)ViewBag.ListaVendedor)
+                        {
+                            <tr>
+                                <td style="padding:2PX;"><button type="button" class="btn btn-warning" onclick="Editar(@item.Id)">Editar</button></td>
+                                <td style="padding:2PX;"><button type="button" class="btn btn-danger" onclick="Excluir(@item.Id)">Excluir</button></td>
+
+                                <td style="padding: 0px 20px 0px 20px;">@item.Id</td>
+                                <td style="padding: 0px 20px 0px 20px;">@item.Nome</td>                                
+                                <td style="padding: 0px 20px 0px 20px;">@item.Email</td>
+                            </tr>
+                        }
+                    }
+                    catch { }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<br />
+
+<br />
+<script>
+    // Função em JS para Editar
+    function Editar(Id) {
+        window.location.href = "../Vendedor/Cadastro/" + Id;
+    }
+
+    // Função em JS para Excluir
+    function Excluir(Id) {
+        window.location.href = "../Vendedor/Excluir/" + Id;
+    }
+</script>
+
+<!-- Rotina Abaixo é para voltar a Listagem de Produtos -->
+<button type="button" class="btn  btn-default" onclick="Voltar()">Retornar para o Menu</button>
+
+<script>
+    function Voltar() {
+        window.location.href = '../../Home/Menu';
+    }
+</script>

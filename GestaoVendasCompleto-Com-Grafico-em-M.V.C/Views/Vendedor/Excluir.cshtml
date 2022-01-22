@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+<div class="modal-dialog">
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title">Exclusão</h4>
+        </div>
+        <div class="modal-body">
+            <h3>Deseja Realmente Excluir o Registro Selecionado ?</h3>
+            <hr />
+
+            <div class="form-inline">
+                <button type="button" class="btn btn-danger btn-sm" onclick="Nao()"><i class="fa fa-check"></i> Não</button>
+                <button type="button" class="btn btn-success btn-sm Cadastro" onclick="Sim()"><i class="fa fa-check"></i> Sim</button>
+            </div>
+        </div>
+    </div>
+
+</div><!-- /.modal-content -->
+</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+    function Sim()
+    {
+        window.location.href = '../../Vendedor/ExcluirVendedor/' + '@ViewData["IdExcluir"].ToString()';
+    }
+
+    function Nao()
+    {
+        window.location.href = '../../Vendedor/Index'
+    }
+</script>
