@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using SistemaVendas.Models; // Importado
+using SistemaVendas.Models;
 
 namespace SistemaVendas.Controllers
 {
